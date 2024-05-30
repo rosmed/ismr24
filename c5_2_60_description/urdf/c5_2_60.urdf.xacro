@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<robot name="c5-2-60" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find c5_2_60_description)/urdf/c5_2_60.xacro" />
+
+  <xacro:arg name="name"   default="c5_2_60"/>
+  <xacro:arg name="parent" default="world"/>
+  
+  <link name="$(arg parent)"/>
+  
+  <xacro:c5_2_60 name="$(arg name)" parent="$(arg parent)">
+  </xacro:c5_2_60>
+    
+</robot>

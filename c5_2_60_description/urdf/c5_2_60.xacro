@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="probe">
+
+  <xacro:macro name="c5_2_60" params="parent name *origin">
+
+
+  </xacro:macro>
+  
+</robot>
+
