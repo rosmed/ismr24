@@ -31,7 +31,6 @@ target_link_libraries( us_system us_sensor ignition-plugin1 ignition-gazebo6 ${V
 
 install( DIRECTORY include DESTINATION share/${PROJECT_NAME} )
 install( DIRECTORY launch DESTINATION share/${PROJECT_NAME} )
-install( DIRECTORY worlds DESTINATION share/${PROJECT_NAME} )
 install( DIRECTORY config DESTINATION share/${PROJECT_NAME} )
 install( TARGETS us_system us_sensor LIBRARY DESTINATION lib )
 
