@@ -130,6 +130,7 @@ void us_system::PostUpdate( const ignition::gazebo::UpdateInfo&,
   std::vector<std::string> fieldnames;
   frame->GetFrameFieldNameList( fieldnames );
 
+  // Begin of the messy part. No (very little) idea about the coordinate frame convention of PlusTK. But this seems to work
   vtkMatrix4x4* Rt_bw = vtkMatrix4x4::New(); // world to block
   Rt_bw->SetElement(0,0,  0); Rt_bw->SetElement(0,1, 0); Rt_bw->SetElement(0,2, 1);
   Rt_bw->SetElement(1,0, -1); Rt_bw->SetElement(1,1, 0); Rt_bw->SetElement(1,2, 0);
@@ -142,23 +143,48 @@ void us_system::PostUpdate( const ignition::gazebo::UpdateInfo&,
   Rtoffset->SetElement(1,0, 0); Rtoffset->SetElement(1,1, -1); Rtoffset->SetElement(1,2, 0);
   Rtoffset->SetElement(2,0, 0); Rtoffset->SetElement(2,1, 0); Rtoffset->SetElement(2,2, 1);
   Rtoffset->SetElement(0,3, -53.31); Rtoffset->SetElement(1,3, -25.6); Rtoffset->SetElement(2,3, -21.93);
+  Rtoffset->SetElement(0,3, 622.062); Rtoffset->SetElement(1,3, 496.0); Rtoffset->SetElement(2,3, -175.635);
 
   vtkMatrix4x4* Rtprobe = vtkMatrix4x4::New();
   Rtprobe->SetElement(1,1, -1);
   Rtprobe->SetElement(2,2, -1);
-  Rtprobe->SetElement(0,3,probepose.Pos().X()*1000);
-  Rtprobe->SetElement(1,3,probepose.Pos().Y()*1000);
-  Rtprobe->SetElement(2,3,probepose.Pos().Z()*1000);
-    
+  Rtprobe->SetElement(0,3,-probepose.Pos().Z()*1000);
+  Rtprobe->SetElement(1,3, probepose.Pos().X()*1000);
+  Rtprobe->SetElement(2,3,-probepose.Pos().Y()*1000);
+  
   vtkMatrix4x4* Rt_flip = vtkMatrix4x4::New();
   vtkMatrix4x4::Multiply4x4( Rtoffset, Rt_bw, Rt_flip );
   vtkMatrix4x4* Rtplus = vtkMatrix4x4::New();
   vtkMatrix4x4::Multiply4x4( Rt_flip, Rtprobe, Rtplus );
 
-  double x = Rtplus->GetElement(0,3);
-  double y = Rtplus->GetElement(1,3);
-  double z = Rtplus->GetElement(2,3);
+  vtkMatrix4x4* Rtcopy = vtkMatrix4x4::New();
+  vtkMatrix4x4::DeepCopy(Rtcopy->GetData(),Rtplus);
 
+  Rtoffset->SetElement(0,0, 0); Rtoffset->SetElement(0,1, 1); Rtoffset->SetElement(0,2, 0);
+  Rtoffset->SetElement(1,0, 0); Rtoffset->SetElement(1,1, 0); Rtoffset->SetElement(1,2,-1);
+  Rtoffset->SetElement(2,0,-1); Rtoffset->SetElement(2,1, 0); Rtoffset->SetElement(2,2, 0);
+  Rtoffset->SetElement(0,3, 0); Rtoffset->SetElement(1,3, 0); Rtoffset->SetElement(2,3, 0);
+  
+  vtkMatrix4x4* Rtign = vtkMatrix4x4::New();
+  vtkMatrix4x4::Multiply4x4( Rtoffset, Rtplus, Rtign );
+
+  Rtign->SetElement(0,0,Rtcopy->GetElement(0,0));
+  Rtign->SetElement(0,1,Rtcopy->GetElement(0,1));
+  Rtign->SetElement(0,2,Rtcopy->GetElement(0,2));
+  Rtign->SetElement(1,0,Rtcopy->GetElement(1,0));
+  Rtign->SetElement(1,1,Rtcopy->GetElement(1,1));
+  Rtign->SetElement(1,2,Rtcopy->GetElement(1,2));
+  Rtign->SetElement(2,0,Rtcopy->GetElement(2,0));
+  Rtign->SetElement(2,1,Rtcopy->GetElement(2,1));
+  Rtign->SetElement(2,2,Rtcopy->GetElement(2,2));
+  
+  std::cout << "Rtplus" << std::endl;
+  std::cout << *Rtplus << std::endl;
+  std::cout << "Rtign" << std::endl;
+  std::cout << *Rtign << std::endl;
+  //vtkMatrix4x4::Multiply4x4( Rtplus, Rtalign, Rtign );
+  //Rtign->SetElement(0,3,x);
+  
   igsioTransformName igsioname("ProbeToTrackerTransform");
   frame->SetFrameTransform(igsioname, Rtplus );
   
