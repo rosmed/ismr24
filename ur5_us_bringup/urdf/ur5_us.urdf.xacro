@@ -121,49 +121,9 @@
     </gazebo>
   </xacro:if>
 
-  <!--
   <xacro:include filename="$(find c5_2_60_description)/urdf/c5_2_60.xacro" />
-  <xacro:c5_2_60 parent="tool0" name="c5_2_60">
+  <xacro:c5_2_60 parent="tool0" name="probe">
     <origin xyz="0.0 -0.05 0.10" rpy="0 0 0"/>
   </xacro:c5_2_60>
-  -->
-  
-  <link name="probe_link">
 
-    <collision>
-      <geometry>
-        <mesh filename="file://$(find c5_2_60_description)/meshes/c5_2_60.dae"/>
-      </geometry>
-    </collision>
-    
-    <visual>
-      <geometry>
-        <mesh filename="file://$(find c5_2_60_description)/meshes/c5_2_60.dae"/>
-      </geometry>
-    </visual>
-
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="0.030"/>
-      <inertia ixx="1.75e-5" ixy="0" ixz="0" iyy="1.75e-5" iyz="0" izz="1.75e-5"/>
-    </inertial>
-  </link>
-  
-  <joint name="probe_joint" type="fixed">
-    <parent link="wrist_3_link"/>
-    <child link="probe_link"/>
-    <origin xyz="0 -0.05 0.10" rpy="0 0 1.5708"/>
-  </joint>
-
-  <gazebo reference="probe_joint">
-    <sensor type="force_torque" name="ft_sensor">
-      <always_on>true</always_on>
-      <pose>0 0 0 0 0 0</pose>
-      <visualize>true</visualize>
-      <update_rate>50</update_rate>
-      <topic>ft_probe</topic>
-      <ignition_frame_id>probe_link</ignition_frame_id>
-    </sensor>
-  </gazebo>
-  
 </robot>

@@ -4,6 +4,9 @@ mesh_files:
       mesh:
         package: ur_description
         path: meshes/ur5e/visual/base.stl
+      material:
+        name: "LightGrey"
+        color: "0.7 0.7 0.7 1.0"
     collision:
       mesh:
         package: ur_description
@@ -14,6 +17,9 @@ mesh_files:
       mesh:
         package: ur_description
         path: meshes/ur5e/visual/shoulder.stl
+      material:
+        name: "LightGrey"
+        color: "0.7 0.7 0.7 1.0"
     collision:
       mesh:
         package: ur_description
@@ -24,6 +30,9 @@ mesh_files:
       mesh:
         package: ur_description
         path: meshes/ur5e/visual/upperarm.stl
+      material:
+        name: "LightGrey"
+        color: "0.7 0.7 0.7 1.0"
     collision:
       mesh:
         package: ur_description
@@ -35,6 +44,9 @@ mesh_files:
       mesh:
         package: ur_description
         path: meshes/ur5e/visual/forearm.stl
+      material:
+        name: "LightGrey"
+        color: "0.7 0.7 0.7 1.0"
     collision:
       mesh:
         package: ur_description
@@ -45,6 +57,9 @@ mesh_files:
       mesh:
         package: ur_description
         path: meshes/ur5e/visual/wrist1.stl
+      material:
+        name: "LightGrey"
+        color: "0.7 0.7 0.7 1.0"
     collision:
       mesh:
         package: ur_description
@@ -56,6 +71,9 @@ mesh_files:
       mesh:
         package: ur_description
         path: meshes/ur5e/visual/wrist2.stl
+      material:
+        name: "LightGrey"
+        color: "0.7 0.7 0.7 1.0"
     collision:
       mesh:
         package: ur_description
@@ -67,6 +85,9 @@ mesh_files:
       mesh:
         package: ur_description
         path: meshes/ur5e/visual/wrist3.stl
+      material:
+        name: "LightGrey"
+        color: "0.7 0.7 0.7 1.0"
     collision:
       mesh:
         package: ur_description

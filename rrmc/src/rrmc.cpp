@@ -40,7 +40,7 @@ void rrmc::ik_callback( const sensor_msgs::msg::JointState& js ){
     KDL::JntArray q_kdl( js.position.size() );
     for( std::size_t i=0; i<q_kdl.rows(); i++ )
       { q_kdl(i) = js.position[i]; }
-
+    std::cout << linear_vel.x() << " " << linear_vel.y() << " " << linear_vel.z() << std::endl;
     KDL::JntArray qd_kdl( q_kdl.rows() );
     KDL::Twist vw( linear_vel, KDL::Vector::Zero() );
     

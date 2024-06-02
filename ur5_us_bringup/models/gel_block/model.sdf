@@ -7,7 +7,7 @@
         <collision name="block_collision">
           <geometry>
             <mesh>
-              <uri>model://gel_block/meshes/SimulatedUltrasound_GelBlockModel_Reference.dae</uri>
+              <uri>model://gel_block/meshes/gel_block.stl</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -16,7 +16,7 @@
           <transparency>0.5</transparency>
           <geometry>
             <mesh>
-              <uri>model://gel_block/meshes/SimulatedUltrasound_GelBlockModel_Reference.dae</uri>
+              <uri>model://gel_block/meshes/gel_block.stl</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>

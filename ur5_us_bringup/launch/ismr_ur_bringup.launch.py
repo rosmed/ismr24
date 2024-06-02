@@ -12,6 +12,10 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
+    pluslib_data_path = SetEnvironmentVariable(name='PLUSLIB_DATA_DIR', value=[os.path.join('ignition_gazebo_us_system', 'config')])
+    pluslib_image_path = SetEnvironmentVariable(name='PLUCONFIG_IMAGE_DIR', value=[os.path.join('ignition_gazebo_us_system', 'config')])
+    pluslib_model_path = SetEnvironmentVariable(name='PLUSCONFIG_MODEL_DIR', value=[os.path.join('ignition_gazebo_us_system', 'config')])
+
     pkg_ur5_us_bringup = get_package_share_directory('ur5_us_bringup')
     ign_resource_path = SetEnvironmentVariable(name='IGN_GAZEBO_RESOURCE_PATH',
                                                value=[os.path.join(pkg_ur5_us_bringup, 'worlds'), ':' +
@@ -76,7 +80,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
         ),
-        launch_arguments={"gz_args": " -r -v 4 rsp.sdf"}.items(),
+        launch_arguments={"gz_args": " -r -v 4 ismr.sdf"}.items(),
     )
 
     ignition_spawn_robot = Node(
@@ -90,7 +94,8 @@ def generate_launch_description():
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=[
-            '/image_raw@sensor_msgs/msg/Image@gz.msgs.Image',
+            '/image_raw@sensor_msgs/msg/Image[gz.msgs.Image',
+            '/ft_probe@geometry_msgs/msg/WrenchStamped[ignition.msgs.Wrench',
         ],
         output='screen',
     )
@@ -114,6 +119,9 @@ def generate_launch_description():
     )
     
     nodes_to_start = [
+        pluslib_data_path,
+        pluslib_image_path,
+        pluslib_model_path,
         ign_resource_path,
         robot_state_publisher_node,
         joint_state_broadcaster_spawner,
@@ -121,7 +129,7 @@ def generate_launch_description():
         ignition_launch_description,
         ignition_spawn_robot,
         bridge,
-        #rrmc,
+        rrmc,
         rviz
     ]
 

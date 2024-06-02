@@ -6,7 +6,7 @@
         <collision name="vessel_collision">
           <geometry>
             <mesh>
-              <uri>model://vessel/meshes/SimulatedUltrasound_VesselModel_Reference.stl</uri>
+              <uri>model://vessel/meshes/vessel.stl</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
@@ -14,7 +14,7 @@
         <visual name="vessel_visual">
           <geometry>
             <mesh>
-              <uri>model://vessel/meshes/SimulatedUltrasound_VesselModel_Reference.stl</uri>
+              <uri>model://vessel/meshes/vessel.stl</uri>
               <scale>0.001 0.001 0.001</scale>
             </mesh>
           </geometry>
