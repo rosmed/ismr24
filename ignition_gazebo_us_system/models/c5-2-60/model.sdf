@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+    <model name="c5-2-60">
+      <link name="probe_link">
+        <pose>0 0 0 0 0 0</pose>
+        <collision name="probe_collision">
+          <geometry>
+            <mesh>
+              <uri>model://c5-2-60/meshes/Probe_C5-2_60.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="probe_visual">
+          <geometry>
+            <mesh>
+              <uri>model://c5-2-60/meshes/Probe_C5-2_60.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+	  <material> <!-- Wheel material -->
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+            <specular>0.1 0.1 0.1 0</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+      <static>true</static>
+    </model>
+</sdf>

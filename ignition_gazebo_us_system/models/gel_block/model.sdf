@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+    <model name="gel_block">
+      <static>true</static>
+      <link name="block">
+        <pose>0 0 0 0 0 0</pose>
+        <collision name="block_collision">
+          <geometry>
+            <mesh>
+              <uri>model://gel_block/meshes/SimulatedUltrasound_GelBlockModel_Reference.dae</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="block_visual">
+          <transparency>0.5</transparency>
+          <geometry>
+            <mesh>
+              <uri>model://gel_block/meshes/SimulatedUltrasound_GelBlockModel_Reference.dae</uri>
+              <scale>0.001 0.001 0.001</scale>
+            </mesh>
+          </geometry>
+          <cast_shadows>true</cast_shadows>
+	  <material> <!-- Wheel material -->
+            <ambient>0.5 0.5 0.5 1</ambient>
+            <diffuse>0.5 0.5 0.5 1</diffuse>
+            <specular>0.1 0.1 0.1 0</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+      <static>true</static>
+    </model>
+</sdf>
