@@ -13,13 +13,13 @@
       
       <collision>
 	<geometry>
-          <mesh filename="file://$(find c5_2_60_description)/meshes/c5_2_60.stl"/>
+          <mesh filename="$(find c5_2_60_description)/meshes/c5_2_60.stl"/>
 	</geometry>
       </collision>
       
       <visual>
 	<geometry>
-          <mesh filename="file://$(find c5_2_60_description)/meshes/c5_2_60.stl"/>
+          <mesh filename="$(find c5_2_60_description)/meshes/c5_2_60.stl"/>
 	</geometry>
 	<material  name="white"/>
       </visual>
