@@ -29,7 +29,7 @@
   <xacro:macro name="get_mesh_path" params="name:=^ type:=^" >
     <xacro:get_visual_params />
     <xacro:if value="${force_abs_paths}">
-      <xacro:property name="mesh" value="file://$(find ${visual_params['mesh']['package']})/${visual_params['mesh']['path']}" scope="parent"/>
+      <xacro:property name="mesh" value="$(find ${visual_params['mesh']['package']})/${visual_params['mesh']['path']}" scope="parent"/>
     </xacro:if>
     <xacro:unless value="${force_abs_paths}">
       <xacro:property name="mesh" value="package://${visual_params['mesh']['package']}/${visual_params['mesh']['path']}" scope="parent"/>
