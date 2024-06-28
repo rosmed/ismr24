@@ -1,0 +1,17 @@
+{
+  "names": {
+    "igsio": {
+      "cmake-args": ["-DVTK_DIR=/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1",
+                     "-DvtkAddon_DIR=../../../build/vtkAddon",
+                     "-DIGSIO_SUPERBUILD=NO",
+                     "-DBUILD_TESTING=NO",
+                     "-DIGSIO_BUILD_CODECS=NO",
+                     "-DIGSIO_BUILD_SEQUENCEIO=NO",
+                     "-DIGSIO_BUILD_VOLUMERECONSTRUCTION=NO",
+                     "-DIGSIO_SEQUENCEIO_ENABLE_MKV=NO",
+                     "-DIGSIO_USE_3DSlicer=NO",
+                     "-DIGSIO_USE_SYSTEM_ZLIB=YES"
+                    ]
+    }
+  }
+}

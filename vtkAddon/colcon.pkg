@@ -1,0 +1,4 @@
+{
+  "name": "vtkAddon",
+  "dependencies": ["libvtk9-dev", "libinsighttoolkit4-dev", "libnetcdf-dev"]
+}

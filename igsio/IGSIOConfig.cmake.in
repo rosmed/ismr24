@@ -1,0 +1,34 @@
+#-----------------------------------------------------------------------------
+#
+# IGSIOConfig.cmake - IGSIO CMake configuration file for external projects.
+#
+
+# The vtkIGSIOCommon include file directories
+set(VTKIGSIOCOMMON_INCLUDE_DIRS "@VTKIGSIOCOMMON_INCLUDE_DIRS_CONFIG@")
+
+# The vtkSequenceIO include file directories.
+set(VTKSEQUENCEIO_INCLUDE_DIRS "@VTKSEQUENCEIO_INCLUDE_DIRS_CONFIG@")
+
+# The vtkVolumeReconstruction include file directories.
+set(VTKVOLUMERECONSTRUCTION_INCLUDE_DIRS "@VTKVOLUMERECONSTRUCTION_INCLUDE_DIRS_CONFIG@")
+
+# The vtkIGSIOCalibration include file directories.
+set(VTKIGSIOCALIBRATION_INCLUDE_DIRS "@VTKIGSIOCALIBRATION_INCLUDE_DIRS_CONFIG@")
+
+set(VTK_DIR "@VTK_DIR@")
+
+set(VP9_DIR "@VP9_DIR@")
+
+if (NOT @IGSIO_USE_3DSlicer@)
+  set(vtkAddon_DIR "@vtkAddon_DIR@")
+  find_package(vtkAddon REQUIRED)
+endif()
+
+set(IGSIO_BUILD_SEQUENCEIO "@IGSIO_BUILD_SEQUENCEIO@")
+set(IGSIO_SEQUENCEIO_ENABLE_MKV "@IGSIO_SEQUENCEIO_ENABLE_MKV@")
+set(IGSIO_BUILD_VOLUMERECONSTRUCTION "@IGSIO_BUILD_VOLUMERECONSTRUCTION@")
+set(IGSIO_USE_VP9 "@IGSIO_USE_VP9@")
+
+# The IGSIO library targets.
+set(IGSIO_LIBRARY_TARGETS_FILE "@IGSIO_LIBRARY_TARGETS_FILE_CONFIG@")
+include(${IGSIO_LIBRARY_TARGETS_FILE})

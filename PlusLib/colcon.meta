@@ -1,0 +1,28 @@
+{
+  "names": {
+    "PlusLib": {
+      "cmake-args": ["-DVTK_DIR=/usr/lib/x86_64-linux-gnu/cmake/vtk-9.1",
+                     "-DITK_DIR=/usr/lib/cmake/ITK-4.13",
+                     "-DIGSIO_DIR=../../../build/igsio",
+                     "-DBUILD_TESTING=NO",
+                     "-DCMAKE_CXX_STANDARD=14",
+                     "-DPLUS_USE_SYSTEM_ZLIB=YES",
+                     "-DBUILD_SHARED_LIBS=YES",
+                     "-DCMAKE_BUILD_TYPE=Release",
+                     "-DPLUS_USE_EPIPHAN=NO",
+                     "-DPLUS_USE_Ascension3DG=NO",
+                     "-DPLUS_USE_Ascension3DGm=NO",
+                     "-DPLUS_USE_PHIDGET_SPATIAL_TRACKER=NO",
+                     "-DPLUS_USE_BRACHY_TRACKER=NO",
+                     "-DPLUS_USE_NVIDIA_DVP=NO",
+                     "-DPLUS_USE_AGILENT=NO",
+                     "-DPLUS_USE_OpenIGTLink=NO",
+                     "-DPLUS_USE_OvrvisionPro=NO",
+                     "-DPLUS_USE_NDI=NO",
+                     "-DPLUS_USE_OpenCV=NO",
+                     "-DPLUS_USE_aruco=NO",
+                     "-DPLUS_USE_IGSIO=NO",
+                    ]
+    }
+  }
+}

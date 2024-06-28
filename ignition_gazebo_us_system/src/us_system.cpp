@@ -28,7 +28,6 @@ void us_system::Configure( const ignition::gazebo::Entity& entity,
 			   ignition::gazebo::EntityComponentManager& ecm,
 			   ignition::gazebo::EventManager&){
 
-
   model = ignition::gazebo::Model(entity);
   
 }
@@ -70,14 +69,14 @@ void us_system::PreUpdate( const ignition::gazebo::UpdateInfo& info,
 	
 	vtkPlusLogger::Instance()->SetLogLevel(vtkPlusLogger::LOG_LEVEL_TRACE);
 	
-	trackedFrameList = vtkSmartPointer< vtkIGSIOTrackedFrameList >::New();
-	if (vtkPlusSequenceIO::Read("transform.mha", trackedFrameList) != PLUS_SUCCESS){
+	trackedFrameList = vtkSmartPointer< vtkPlusTrackedFrameList >::New();
+	if (vtkPlusSequenceIO::Read(sensor->plusdir+"/transform.mha", trackedFrameList) != PLUS_SUCCESS){
 	  std::cout <<  "Unable to load input sequences file." << std::endl;
 	  exit(EXIT_FAILURE);
 	}
 	trackedFrameList->PrintSelf( std::cout, vtkIndent() );
 	  
-	vtkSmartPointer<vtkIGSIOTrackedFrameList> simulatedUltrasoundFrameList = vtkSmartPointer<vtkIGSIOTrackedFrameList>::New();
+	vtkSmartPointer<vtkPlusTrackedFrameList> simulatedUltrasoundFrameList = vtkSmartPointer<vtkPlusTrackedFrameList>::New();
 	  
 	vtkSmartPointer<vtkXMLDataElement> configRootElement=vtkSmartPointer<vtkXMLDataElement>::New();
 	if(PlusXmlUtils::ReadDeviceSetConfigurationFromFile(configRootElement, sensor->plusconfig.c_str()) == PLUS_FAIL){
@@ -85,7 +84,7 @@ void us_system::PreUpdate( const ignition::gazebo::UpdateInfo& info,
 	  exit(EXIT_FAILURE);
 	}
 	
-	transformRepository = vtkSmartPointer<vtkIGSIOTransformRepository>::New();
+	transformRepository = vtkSmartPointer<vtkPlusTransformRepository>::New();
 	if (transformRepository->ReadConfiguration(configRootElement) != PLUS_SUCCESS){
 	  std::cout << "Failed to read transforms for transform repository!" << std::endl;
 	    exit(EXIT_FAILURE);
@@ -124,8 +123,8 @@ void us_system::PostUpdate( const ignition::gazebo::UpdateInfo&,
       return true;
       
     });
-
-  igsioTrackedFrame* frame = trackedFrameList->GetTrackedFrame(0);
+  std::cout << probepose << std::endl;
+  PlusTrackedFrame* frame = trackedFrameList->GetTrackedFrame(0);
   
   std::vector<std::string> fieldnames;
   frame->GetFrameFieldNameList( fieldnames );
@@ -177,15 +176,17 @@ void us_system::PostUpdate( const ignition::gazebo::UpdateInfo&,
   Rtign->SetElement(2,0,Rtcopy->GetElement(2,0));
   Rtign->SetElement(2,1,Rtcopy->GetElement(2,1));
   Rtign->SetElement(2,2,Rtcopy->GetElement(2,2));
-  
+
   std::cout << "Rtplus" << std::endl;
   std::cout << *Rtplus << std::endl;
   std::cout << "Rtign" << std::endl;
   std::cout << *Rtign << std::endl;
+
   //vtkMatrix4x4::Multiply4x4( Rtplus, Rtalign, Rtign );
   //Rtign->SetElement(0,3,x);
+  //vtkMatrix4x4* Rtplus = vtkMatrix4x4::New();
   
-  igsioTransformName igsioname("ProbeToTrackerTransform");
+  PlusTransformName igsioname("ProbeToTrackerTransform");
   frame->SetFrameTransform(igsioname, Rtplus );
   
   if (transformRepository->SetTransforms(*frame) != PLUS_SUCCESS){

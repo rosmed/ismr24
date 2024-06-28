@@ -1,0 +1,4 @@
+{
+  "name": "PlusLib",
+  "dependencies": ["igsio", "libvtk9-dev", "libinsighttoolkit4-dev", "libnetcdf-dev"]
+}

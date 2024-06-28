@@ -4,14 +4,22 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
-from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable
+from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.conditions import IfCondition
 
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.actions import Node
 
 def generate_launch_description():
 
+    rviz_arg = DeclareLaunchArgument('rviz',
+                                     default_value='false',
+                                     choices=['true', 'false'])
+
+    rviz_config = LaunchConfiguration('rviz')
+    
     pluslib_data_path = SetEnvironmentVariable(name='PLUSLIB_DATA_DIR', value=[os.path.join('ignition_gazebo_us_system', 'config')])
     pluslib_image_path = SetEnvironmentVariable(name='PLUCONFIG_IMAGE_DIR', value=[os.path.join('ignition_gazebo_us_system', 'config')])
     pluslib_model_path = SetEnvironmentVariable(name='PLUSCONFIG_MODEL_DIR', value=[os.path.join('ignition_gazebo_us_system', 'config')])
@@ -104,7 +112,8 @@ def generate_launch_description():
         package="rviz2",
         executable="rviz2",
         name="rviz",
-        arguments=["-d", rviz_config_file]
+        arguments=["-d", rviz_config_file],
+        condition=IfCondition(rviz_config)
     )
 
     rrmc = Node(
@@ -119,6 +128,7 @@ def generate_launch_description():
     )
     
     nodes_to_start = [
+        rviz_arg,
         pluslib_data_path,
         pluslib_image_path,
         pluslib_model_path,

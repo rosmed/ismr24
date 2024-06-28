@@ -7,8 +7,8 @@
 #include <gz/common/Image.hh>
 
 #include "PlusConfigure.h"
-#include "igsioMath.h"
-#include "igsioTrackedFrame.h"
+//#include "igsioMath.h"
+#include "PlusTrackedFrame.h"
 #include "vtkAppendPolyData.h"
 #include "vtkCubeSource.h"
 #include "vtkImageData.h"
@@ -18,10 +18,10 @@
 #include "vtkPlusSequenceIO.h"
 #include "vtkSmartPointer.h"
 #include "vtkTimerLog.h"
-#include "vtkIGSIOTrackedFrameList.h"
+#include "vtkPlusTrackedFrameList.h"
 #include "vtkTransform.h"
 #include "vtkTransformPolyDataFilter.h"
-#include "vtkIGSIOTransformRepository.h"
+#include "vtkPlusTransformRepository.h"
 #include "vtkPlusUsSimulatorAlgo.h"
 #include "vtkXMLImageDataWriter.h"
 #include "vtkXMLUtilities.h"
@@ -35,10 +35,10 @@ class us_system:
 
 private:
 
-  vtkSmartPointer<vtkIGSIOTransformRepository> transformRepository;
+  vtkSmartPointer<vtkPlusTransformRepository> transformRepository;
   vtkSmartPointer<vtkPlusUsSimulatorAlgo> usSimulator;
-  vtkSmartPointer<vtkIGSIOTrackedFrameList > trackedFrameList;
-  vtkSmartPointer<vtkIGSIOTrackedFrameList> simulatedUltrasoundFrameList;
+  vtkSmartPointer<vtkPlusTrackedFrameList > trackedFrameList;
+  vtkSmartPointer<vtkPlusTrackedFrameList> simulatedUltrasoundFrameList;
   vtkSmartPointer<vtkPlusConfig> plusConfig;
 
   std::unique_ptr<USSensor> sensor{nullptr};
